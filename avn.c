@@ -28,14 +28,17 @@ void removerFilho(NO** raiz, TIPOCHAVE chave) {
     if ((*raiz)->chave == chave) {
         NO* temp = *raiz;
         *raiz = (*raiz)->primFilho;
-        if (*raiz) {
+
+        if (*raiz != NULL) {
             NO* irmao = (*raiz)->proxIrmao;
             (*raiz)->proxIrmao = temp->proxIrmao;
-            while (irmao) {
+
+            while (irmao != NULL) {
                 adicionarFilho(*raiz, irmao);
                 irmao = irmao->proxIrmao;
             }
         }
+
         free(temp);
         return;
     }
@@ -65,8 +68,10 @@ void removerFilho(NO** raiz, TIPOCHAVE chave) {
         temp->proxIrmao = pai->primFilho;
         pai->primFilho = atual->primFilho;
     }
+
     free(atual);
 }
+
 
 NO* buscarNo(NO* raiz, TIPOCHAVE chave) {
     if (raiz == NULL) return NULL;
